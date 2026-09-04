@@ -17,7 +17,7 @@ test("accepts only supported HTTPS documentation URLs", () => {
 test("collects readable text from validated documentation", async () => {
   const result = await collectResearch(["https://docs.fabricmc.net/develop/"], async () => ({
     ok: true,
-    text: async () => "<h1>Fabric</h1><script>secret()</script><p>Guide</p>",
+    text: async () => "<h1>Fabric</h1><script>secret()</script ><p>Guide</p>",
   }));
 
   assert.deepEqual(result, [{ url: "https://docs.fabricmc.net/develop/", content: "Fabric Guide" }]);

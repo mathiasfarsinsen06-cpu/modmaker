@@ -17,11 +17,22 @@ export function validateDocumentationUrl(value) {
   return url;
 }
 
+function removeElement(html, name) {
+  let start = html.toLowerCase().indexOf(`<${name}`);
+  while (start !== -1) {
+    const endTag = html.toLowerCase().indexOf(`</${name}`, start + name.length + 1);
+    if (endTag === -1) return html.slice(0, start);
+    const end = html.indexOf(">", endTag);
+    html = html.slice(0, start) + (end === -1 ? "" : html.slice(end + 1));
+    start = html.toLowerCase().indexOf(`<${name}`);
+  }
+  return html;
+}
+
 function htmlToText(html) {
-  return html
-    .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, "")
-    .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, "")
+  return removeElement(removeElement(html, "script"), "style")
     .replace(/<[^>]+>/g, " ")
+    .replace(/[\u0000-\u001F\u007F-\u009F]/g, " ")
     .replace(/\s+/g, " ")
     .trim()
     .slice(0, 20_000);
