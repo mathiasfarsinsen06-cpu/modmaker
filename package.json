@@ -1,0 +1,19 @@
+{
+  "name": "modmaker",
+  "version": "1.0.0",
+  "description": "Research-assisted Minecraft mod development and verification CLI",
+  "type": "module",
+  "bin": {
+    "modmaker": "./bin/modmaker.js"
+  },
+  "scripts": {
+    "test": "node --test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://localhost:26831/mathiasfarsinsen06-cpu/modmaker"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
